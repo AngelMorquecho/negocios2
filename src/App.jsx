@@ -14,6 +14,7 @@ import UpdateProduct from './pages/UpdateProduct';
 import Grafica from './pages/Grafica';
 import Details from './pages/Datails';
 import Busqueda from './components/Busqueda';
+import OrdenC from './components/OrdenC';
 
 
 function App() {
@@ -36,6 +37,7 @@ function App() {
     <Route path='/grafica'element={<Grafica/>}/>
     <Route path='/detalles/:id'element={<Details/>}/>
     <Route path='/busqueda'element={<Busqueda/>}/>
+    <Route path='/ordenC'element={<OrdenC/>}/>
   </Routes>
 
 
