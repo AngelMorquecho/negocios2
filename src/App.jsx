@@ -13,8 +13,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import UpdateProduct from './pages/UpdateProduct';
 import Grafica from './pages/Grafica';
 import Details from './pages/Datails';
-
-
+import Busqueda from './components/Busqueda';
 
 
 function App() {
@@ -36,6 +35,7 @@ function App() {
     <Route path='/product/:id'element={<UpdateProduct/>}/>
     <Route path='/grafica'element={<Grafica/>}/>
     <Route path='/detalles/:id'element={<Details/>}/>
+    <Route path='/busqueda'element={<Busqueda/>}/>
   </Routes>
 
 
