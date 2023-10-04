@@ -15,6 +15,7 @@ import Grafica from './pages/Grafica';
 import Details from './pages/Datails';
 import Busqueda from './components/Busqueda';
 import OrdenC from './components/OrdenC';
+import WeShipButton from './components/WeShipButton';
 
 
 function App() {
@@ -38,6 +39,8 @@ function App() {
     <Route path='/detalles/:id'element={<Details/>}/>
     <Route path='/busqueda'element={<Busqueda/>}/>
     <Route path='/ordenC'element={<OrdenC/>}/>
+    <Route exact path="/buttonweship"element={ <WeShipButton/>} />
+          
   </Routes>
 
 
