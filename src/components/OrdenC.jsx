@@ -4,6 +4,7 @@ import {Link}from'react-router-dom'
 import sportImage from'../img/sportImage.png'
 import axios from 'axios'
 import "bootstrap/dist/css/bootstrap.min.css"
+import WeShipButton from './WeShipButton';
 
 // const nombres = ["Leo", "Angel", "Caro", "Anna", "Juanito"];
 // console.log(nombres)
@@ -109,6 +110,10 @@ const OrdenC = () => {
           }
         </tbody>
       </table>
+    <div>
+      <h1>Consulta de WeShip API</h1>
+      <WeShipButton />
+    </div>
 
     </>
   )
