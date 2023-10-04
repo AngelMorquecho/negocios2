@@ -26,10 +26,6 @@ const Order = () => {
   const year = newDate.getFullYear();
   const dateNow = year + "-" + "0" + month + "-" + date;
   const [productLs, setProdcutLs] = useState([]);
-  const [productLs1, setProdcutLs1] = useState([]);
-  const [productLs2, setProdcutLs2] = useState([]);
-  const [productLs3, setProdcutLs3] = useState([]);
-  const [productLs4, setProdcutLs4] = useState([]);
   const [modal, setModal] = useState(false);
   const [excelente, setExcelente] = useState(false);
   const [buena, setBuena] = useState(false);
@@ -85,7 +81,7 @@ const handleSubmit=e=>{
   const navigate=useNavigate()
   useEffect(() => {
     const getProductLs = () => {
-      const pLs = JSON.parse(localStorage.getItem("product")) ?? [];
+      const pLs = JSON.parse(localStorage.getItem("productLS")) ?? [];
       
       setProdcutLs(pLs);
       //setProdcutLs(pLs1);
