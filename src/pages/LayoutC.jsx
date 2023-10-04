@@ -15,12 +15,13 @@ import c1 from "../img/c1.png";
 import whatsApp from "../img/whatsApp.jpg"
 import facebook from "../img/facebook.png"
 import axios from "axios";
-import { sweetAlerProducts, sweetAlertLoginC,sweetAlertLoginOut } from "../sweetAlert/Alert";
+import { sweetAlerProducts,sweetAlertLoginOut } from "../sweetAlert/Alert";
 const LayoutClient = () => {
   const navigate = useNavigate();
   const tokenUser = localStorage.getItem("token");
   const [product, setProdcut] = useState([]);
   const [productAdd, setProdcutAdd] = useState([]);
+  const random=Math.random()+1
 
   /*useEffect(() => {
    if(!tokenUser){
@@ -176,12 +177,6 @@ const LayoutClient = () => {
                      // localStorage.setItem('product2',JSON.stringify(product))
                      // localStorage.setItem('product3',JSON.stringify(product))
                       //localStorage.setItem('product4',JSON.stringify(product))
-                      
-                  
-                  
-                  
-                  
-                      
                       sweetAlerProducts()
                     }}
 

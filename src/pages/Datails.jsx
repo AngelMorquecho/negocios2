@@ -12,12 +12,14 @@ import {
 } from "react-bootstrap";
 import { Link, useNavigate } from "react-router-dom";
 import { useParams } from "react-router-dom";
+import {sweetAlerProducts}from "../sweetAlert/Alert"
 import sportImage from "../img/sportImage.png";
 import axios from "axios";
 
 const Details = () => {
 const [product, setProdcut] = useState([]);
   const tokenUser = localStorage.getItem("token");
+  const [productAdd, setProdcutAdd] = useState([]);
   const navigate = useNavigate();
   const {id}=useParams()
 
@@ -100,7 +102,7 @@ const [product, setProdcut] = useState([]);
                     onClick={() => {
                       const product = productAdd;
                       
-                      const productObj={id:product1.id,nameProduct:product1.name,price:product1.price,description:product1.description,quantity:product1.quantity}
+                      const productObj={id:product.id,nameProduct:product.name,price:product.price,description:product.description,quantity:product.quantity}
                       product.push(
                        productObj
                       );
@@ -109,12 +111,6 @@ const [product, setProdcut] = useState([]);
                      // localStorage.setItem('product2',JSON.stringify(product))
                      // localStorage.setItem('product3',JSON.stringify(product))
                       //localStorage.setItem('product4',JSON.stringify(product))
-                      
-                  
-                  
-                  
-                  
-                      
                       sweetAlerProducts()
                     }}
 
