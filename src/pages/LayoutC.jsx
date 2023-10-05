@@ -21,6 +21,7 @@ const LayoutClient = () => {
   const tokenUser = localStorage.getItem("token");
   const [product, setProdcut] = useState([]);
   const [productAdd, setProdcutAdd] = useState([]);
+  const [quantity, setQuantity] = useState(0);
   const random=Math.random()+1
 
   /*useEffect(() => {
@@ -109,6 +110,17 @@ const LayoutClient = () => {
             {!tokenUser ? (
               ""
             ) : (
+              <>
+              <Button
+                className="text-decoration-none text-white text-uppercase m-5"
+                onClick={() => {
+                  navigate("/OrdenC");
+                  window.location.href=window.location.href
+                }}
+                variant="dark"
+              >
+                Ver ordenes anteriores
+              </Button>
               <Button
                 className="text-decoration-none text-white text-uppercase m-5"
                 onClick={() => {
@@ -120,6 +132,7 @@ const LayoutClient = () => {
               >
                 Login Out
               </Button>
+              </>
             )}
           </Navbar.Collapse>
         </Container>
@@ -178,6 +191,7 @@ const LayoutClient = () => {
                      // localStorage.setItem('product3',JSON.stringify(product))
                       //localStorage.setItem('product4',JSON.stringify(product))
                       sweetAlerProducts()
+                      setQuantity(quantity+1);
                     }}
 
                   >
