@@ -76,9 +76,16 @@ sweetAlertLoginS()
               <>
             <Link to='/loginS' className='text-decoration-none text-white text-uppercase m-5'>Login</Link>
             <Nav> <Link to='/createCountS' className='text-decoration-none text-white text-uppercase'>CREATE COUNT</Link></Nav></>)}
-            {!tokenUser ?(''):(<Button className='text-decoration-none text-white text-uppercase m-5'onClick={()=>{localStorage.clear()
-    navigate('/sportClubS')
-    window.location.href=window.location.href}}variant="dark">Login Out</Button>)}
+            {!tokenUser ?(''):(
+              <>
+            <Button className='text-decoration-none text-white text-uppercase m-5'onClick={()=>{
+              navigate('/Busqueda')
+              window.location.href=window.location.href}}variant="dark">Ver las ordenes de los clientes</Button>
+            <Button className='text-decoration-none text-white text-uppercase m-5'onClick={()=>{localStorage.clear()
+            navigate('/sportClubS')
+            window.location.href=window.location.href}}variant="dark">Login Out</Button>
+            </>
+            )}
     
 
           
