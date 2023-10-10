@@ -1,3 +1,4 @@
+
 import React, { useEffect, useState } from "react";
 import {
   Container,
@@ -15,25 +16,15 @@ import c1 from "../img/c1.png";
 import whatsApp from "../img/whatsApp.jpg"
 import facebook from "../img/facebook.png"
 import axios from "axios";
-import Badge from '@mui/material/Badge';
-import { styled } from '@mui/material/styles';
-import IconButton from '@mui/material/IconButton';
-import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import { sweetAlerProducts,sweetAlertLoginOut } from "../sweetAlert/Alert";
 const LayoutClient = () => {
   const navigate = useNavigate();
   const tokenUser = localStorage.getItem("token");
   const [product, setProdcut] = useState([]);
   const [productAdd, setProdcutAdd] = useState([]);
- const car=JSON.parse(localStorage.getItem('product'))
-  const StyledBadge = styled(Badge)(({ theme }) => ({
-    '& .MuiBadge-badge': {
-      right: -3,
-      top: 2,
-      border: `2px solid ${theme.palette.background.paper}`,
-      padding: '0 4px',
-    },
-  }));
+  const [quantity, setQuantity] = useState(0);
+  const random=Math.random()+1
+
   /*useEffect(() => {
    if(!tokenUser){
     sweetAlertLoginC()
@@ -69,16 +60,7 @@ const LayoutClient = () => {
          
           <Navbar.Collapse id="responsive-navbar-nav">
             <Nav className="me-auto">
-                <Link to='/shoppingCart'><IconButton aria-label="cart">
-                  {!car ?(
-                    <StyledBadge badgeContent={0} color="warning">
-                    <ShoppingCartIcon style={{ color: "#ffff" }}fontSize="large"  />
-                  </StyledBadge>
-                  ):(<StyledBadge badgeContent={car.length} color="warning">
-                  <ShoppingCartIcon style={{ color: "#ffff" }}fontSize="large"  />
-                </StyledBadge>)}
-          
-        </IconButton></Link>
+                <Link to='/shoppingCart'> <Image src={c1} width={35} height={35} /></Link>
              
             </Nav>
             {!tokenUser ?(  
@@ -102,16 +84,6 @@ const LayoutClient = () => {
           
             </>):(
               <>
-
-               <Nav>
-                {!tokenUser ?(''):(<>
-                  <Link to='/orderProduct' className="text-decoration-none text-white text-uppercase m-1">Orden del Dia </Link>
-                <Link to='/ordersClient' className="text-decoration-none text-white text-uppercase m-1">Ordenes Anteriores</Link>
-                </>
-                )
-                
-                }
-              </Nav>
                 <Nav>
                 {" "}
                 <Link
@@ -139,17 +111,29 @@ const LayoutClient = () => {
             {!tokenUser ? (
               ""
             ) : (
+              <>
+              <Button
+                className="text-decoration-none text-white text-uppercase m-5"
+                onClick={() => {
+                  navigate("/OrdenC");
+                  window.location.href=window.location.href
+                }}
+                variant="dark"
+              >
+                Ver ordenes anteriores
+              </Button>
               <Button
                 className="text-decoration-none text-white text-uppercase m-5"
                 onClick={() => {
                   localStorage.clear();
                   navigate("/sportClubC");
-                 
+                  window.location.href=window.location.href
                 }}
                 variant="dark"
               >
                 Login Out
               </Button>
+              </>
             )}
           </Navbar.Collapse>
         </Container>
@@ -198,9 +182,7 @@ const LayoutClient = () => {
                     onClick={() => {
                       const product = productAdd;
                       
-                      const productObj={id:product1.id,nameProduct:product1.name,price:product1.price,
-                        high:product1.high,width:product1.width,weight:product1.weight,
-                        description:product1.description,quantity:product1.quantity}
+                      const productObj={id:product1.id,nameProduct:product1.name,price:product1.price,description:product1.description,quantity:product1.quantity}
                       product.push(
                        productObj
                       );
@@ -210,6 +192,7 @@ const LayoutClient = () => {
                      // localStorage.setItem('product3',JSON.stringify(product))
                       //localStorage.setItem('product4',JSON.stringify(product))
                       sweetAlerProducts()
+                      setQuantity(quantity+1);
                     }}
 
                   >
@@ -231,3 +214,4 @@ const LayoutClient = () => {
 };
 
 export default LayoutClient;
+

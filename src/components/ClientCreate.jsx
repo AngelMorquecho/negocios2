@@ -53,8 +53,7 @@ const ClientCreate = () => {
      
         
        }).catch(error=>{
-        
-       sweetAlertUserExist()
+         console.log(error)
        })
       
      
@@ -80,7 +79,7 @@ const ClientCreate = () => {
              />
           </Col>
         </Row>
-        
+       
         <Row>
           <Form.Label htmlFor='sex' className='text-center text-uppercase blockquote mt-3'>Sex:</Form.Label>
           <Col md={{ span: 4, offset: 4 }}>
@@ -157,7 +156,7 @@ const ClientCreate = () => {
       
        
       </Form>
-      <h6 className="text-center text-uppercase mt-3">¿Do you have a count?{" "}<span> <Link to='/loginC' className='text-decoration-none text-black'>LOGIN</Link></span></h6>
+      <h6 className="text-center text-uppercase mt-3">¿Do you have acount?{" "}<span> <Link to='/loginC' className='text-decoration-none text-black'>LOGIN</Link></span></h6>
     </Container>
  
     </>

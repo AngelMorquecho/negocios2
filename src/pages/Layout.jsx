@@ -1,3 +1,4 @@
+
 import React, { useEffect, useState } from "react";
 import {
   Container,
@@ -20,7 +21,7 @@ import { sweetAlerProductsDelete, sweetAlertLoginOut, sweetAlertLoginS} from "..
 
 const Layout = () => {
   const navigate = useNavigate();
-  const tokenUser=localStorage.getItem('tokenS')
+  const tokenUser=localStorage.getItem('token')
   const [product, setProdcut] = useState([]);
   
   useEffect(() => {
@@ -71,15 +72,21 @@ sweetAlertLoginS()
            
     {!tokenUser ?(''):(<Nav>
       <Link to='/grafica'className='text-decoration-none text-white text-uppercase m-5'>Grafica Satisfaccion</Link>
-      <Link to='/search'className='text-decoration-none text-white text-uppercase m-5'>Busqueda de Ordenes</Link>
     </Nav>)}
     {!tokenUser &&(
               <>
             <Link to='/loginS' className='text-decoration-none text-white text-uppercase m-5'>Login</Link>
             <Nav> <Link to='/createCountS' className='text-decoration-none text-white text-uppercase'>CREATE COUNT</Link></Nav></>)}
-            {!tokenUser ?(''):(<Button className='text-decoration-none text-white text-uppercase m-5'onClick={()=>{localStorage.clear()
-    navigate('/sportClubS')
-    window.location.href=window.location.href}}variant="dark">Login Out</Button>)}
+            {!tokenUser ?(''):(
+              <>
+            <Button className='text-decoration-none text-white text-uppercase m-5'onClick={()=>{
+              navigate('/Busqueda')
+              window.location.href=window.location.href}}variant="dark">Ver las ordenes de los clientes</Button>
+            <Button className='text-decoration-none text-white text-uppercase m-5'onClick={()=>{localStorage.clear()
+            navigate('/sportClubS')
+            window.location.href=window.location.href}}variant="dark">Login Out</Button>
+            </>
+            )}
     
 
           

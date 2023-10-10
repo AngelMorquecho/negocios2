@@ -14,8 +14,13 @@ import UpdateProduct from './pages/UpdateProduct';
 import Grafica from './pages/Grafica';
 import Details from './pages/Datails';
 import Busqueda from './components/Busqueda';
+<<<<<<< HEAD
 import OrdersClient from './pages/OrdersClient';
 import Search from './pages/Search';
+=======
+import OrdenC from './components/OrdenC';
+
+>>>>>>> 24ee31eef7a8e2edebe121b7f8146265cf5d9ab9
 
 
 function App() {
@@ -38,8 +43,14 @@ function App() {
     <Route path='/grafica'element={<Grafica/>}/>
     <Route path='/detalles/:id'element={<Details/>}/>
     <Route path='/busqueda'element={<Busqueda/>}/>
+<<<<<<< HEAD
     <Route path='/ordersClient'element={<OrdersClient/>}/>
     <Route path='/search'element={<Search/>}/>
+=======
+    <Route path='/ordenC'element={<OrdenC/>}/>
+   
+          
+>>>>>>> 24ee31eef7a8e2edebe121b7f8146265cf5d9ab9
   </Routes>
 
 
