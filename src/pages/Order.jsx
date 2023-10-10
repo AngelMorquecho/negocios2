@@ -13,12 +13,9 @@ import {
   FormCheck,
   FormLabel,
 } from "react-bootstrap";
-import Modal from 'react-bootstrap/Modal';
 import { useNavigate, Link } from "react-router-dom";
 import sportImage from "../img/sportImage.png";
-import c1 from "../img/c1.png";
 import axios from "axios";
-import { sweetAlertSatisfaccion,sweetAlertSatisfaccionError } from "../sweetAlert/Alert";
 const Order = () => {
   const newDate = new Date();
   const date = newDate.getDate();
@@ -26,62 +23,14 @@ const Order = () => {
   const year = newDate.getFullYear();
   const dateNow = year + "-" + "0" + month + "-" + date;
   const [productLs, setProdcutLs] = useState([]);
-  const [modal, setModal] = useState(false);
-  const [excelente, setExcelente] = useState(false);
-  const [buena, setBuena] = useState(false);
-  const [mala, setMala] = useState(false);
+  const [data, setData] = useState({});
+  const [button, setButton] = useState(true);
+  const[text,setText]=useState(false)
   const tokenUser = localStorage.getItem("token");
-  const close=()=>{
-    setModal(false)
- 
-}
-const handleSubmit=e=>{
-  e.preventDefault()
-  if(!excelente &&!buena && !mala){
-    sweetAlertSatisfaccionError()
-    return
-  }
-  else if(excelente){
-    axios.post(`${import.meta.env.VITE_BACKEND_URL}satisfaccion`,{excelente:10,buena:0,mala:0})
-    .then(response=>{
-      if(response.status==200){
-        sweetAlertSatisfaccion()
-      }
-      setModal(false)
-    }).catch(error=>{
-      console.log(error)
-    })
-  }else if(buena){
-    axios.post(`${import.meta.env.VITE_BACKEND_URL}satisfaccion`,{excelente:0,buena:5,mala:0})
-    .then(response=>{
-      if(response.status==200){
-        sweetAlertSatisfaccion()
-      }
-      setModal(false)
-    })
-   .catch(error=>{
-    console.log(error)
-   })
-  }else if(mala){
-    axios.post(`${import.meta.env.VITE_BACKEND_URL}satisfaccion`,{excelente:0,buena:0,mala:3})
-    .then(response=>{
-      if(response.status==200){
-      sweetAlertSatisfaccion()
-      }
-      setModal(false)
-    })
-   .catch(error=>{
-    console.log(error)
-   })
-  }
-
- 
-
-}
   const navigate=useNavigate()
   useEffect(() => {
     const getProductLs = () => {
-      const pLs = JSON.parse(localStorage.getItem("productLS")) ?? [];
+      const pLs = JSON.parse(localStorage.getItem("product")) ?? [];
       
       setProdcutLs(pLs);
       //setProdcutLs(pLs1);
@@ -89,13 +38,82 @@ const handleSubmit=e=>{
       //setProdcutLs(pLs3);
       //setProdcutLs(pLs4);
     };
+  
     getProductLs();
   }, []);
-  useEffect(()=>{
-    setTimeout(()=>{
-setModal(true)
-    },5000)
-  },[])
+  const handleSubmit=()=>{
+    var options = {
+        method: 'post',
+        url: 'https://api.weship.com/orders/quoteOrder',
+        headers: {Authorization:localStorage.getItem('wtk')},
+        data:
+          {
+            "sender": {
+                "name": "Sender Name",
+                "email": "sender@email.com",
+                "companyName": "Sender Company",
+                "phone": "811111111111",
+                "country": "México",
+                "country_code": "MX",
+                "province": "Puebla",
+                "province_code": "PU",
+                "city": "Puebla",
+                "address1": "Cuauhtémoc 28",
+                "address2": "Agrícola Ignacio Zaragoza",
+                "optionalInfo": "",
+                "zip": "72100"
+            },
+            "recipient": {
+                "name": "Recipient Name",
+                "email": "recipient@email.com",
+                "companyName": null,
+                "phone": "211111111111",
+                "country": "Mexico",
+                "country_code": "MX",
+                "province": "Nuevo León",
+                "province_code": "NL",
+                "city": "San Pedro Garza García",
+                "address1": "Valle del Mezquite 1431",
+                "address2": "Palo Blanco",
+                "optionalInfo": null,
+                "zip": "66236"
+            },
+            "packages": [
+                {
+                    "h": productLs[0,1].high,
+                    "w": productLs[0,1].width,
+                    "hh": 2,
+                    "weight":productLs.length,
+                    "sizeUnit": "CM",
+                    "weightUnit": "KG",
+                    "declaredValue": 0
+                }
+            ],
+            "courier": [
+                "fedex",
+                "estafeta",
+                "99minutos"
+            ]
+        
+        }
+    }
+      
+    
+    axios.request(options).then((response)=>{
+      if(response.status==200){
+      
+      setData(response.data);
+     
+    }
+    setButton(false)
+    setText(true)
+    //console.log(data.data[0])
+   
+    }).catch(function (error) {
+      console.error(error);
+    });
+  }
+
   return (
     <>
       <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
@@ -115,10 +133,7 @@ setModal(true)
           <Navbar.Toggle aria-controls="responsive-navbar-nav" />
           <Navbar.Collapse id="responsive-navbar-nav">
             <Nav className="me-auto">
-              <Link to="/shoppingCart">
-                {" "}
-                <Image src={c1} width={35} height={35} />
-              </Link>
+             
             </Nav>
             {!tokenUser ? (
               ""
@@ -138,10 +153,9 @@ setModal(true)
           </Navbar.Collapse>
         </Container>
       </Navbar>
-      {!modal?(<h1 className="text-center text-uppercase">Order Product</h1>):(<h1 className="text-center text-uppercase">Encuesta</h1>)}
+      <h1 className="text-center text-uppercase">Order Product</h1>
       <Col md={{ span: 5, offset: 4 }}>
         <Container>
-        {!modal?(<>
           <Table striped bordered hover variant="dark">
             <thead>
               <tr>
@@ -153,78 +167,41 @@ setModal(true)
               </tr>
             </thead>
             <tbody>
-              {productLs.map((product) => (
+              {productLs.map((product,index) => (
                 <tr>
                   <td>{product.nameProduct}</td>
                   <td>{product.description}</td>
                   <td>{product.price}</td>
                   <td>{dateNow}</td>
                   <td>{localStorage.getItem("email")}</td>
+                
                 </tr>
+                
               ))}
             </tbody>
           </Table>
-         
-         
-        </>):(
-          <>
-             <div
-      className="modal show"
-      style={{ display: 'block', position: 'initial' }}
-    >
-        {!modal?(''):(<Container className="text-center">
-            <Modal.Dialog>
-        <Modal.Header closeButton>
-          <Modal.Title>¿Como fue tu experiencia usando nuestra pagina?</Modal.Title>
-        </Modal.Header>
-<Container className="justify-content-between">
-        <Modal.Body>
-        
-          <FormLabel >Excelente</FormLabel>
-          <Form.Check
-                type="checkBox"
-                id="excelente"
-                name="excelente"
-                value={excelente}
-                onChange={(e) => setExcelente(e.target.checked)}
-                
-              />
-              <FormLabel >Buena</FormLabel>
-          <Form.Check
-                type="checkBox"
-                id="buena"
-                name="buena"
-                value={buena}
-                onChange={(e) => setBuena(e.target.checked)}
-                
-               
-              />
-              <FormLabel >Mala</FormLabel>
-          <Form.Check
-                type="checkBox"
-                id="mala"
-                name="mala"
-                value={mala}
-                onChange={(e) => setMala(e.target.checked)}
-              
-              />
-         
-        </Modal.Body>
-        </Container>
-        <Modal.Footer>
-          <Button variant="danger"onClick={close}>Close</Button>
-          <Button variant="primary"onClick={handleSubmit}>Save</Button>
-        </Modal.Footer>
-      </Modal.Dialog>
-        </Container>)}
-      
-    </div>
-          </>
-        )}
-         
         </Container>
       </Col>
-      
+   <Container className="text-center">
+    {!button?(''):(
+    <Button onClick={handleSubmit}>
+      Detalles de Envio
+    </Button>)}
+    {!text?(''):(
+    <>
+    <h5>Enivo:</h5>
+    <p>Mensajeria: <span>{data.data[0].courier}</span></p>
+    <p>Cantidad: <span>{data.data[0].amount}</span></p>
+    <p>Moneda: <span>{data.data[0].currency}</span></p>
+    <p>Entrega Estimada: <span>{data.data[0].deliveryTimestamp}</span></p>
+    <p>Tamaño de Paquete: <span>{data.data[0].packageSize}</span></p>
+    <p>Nombre de Servicio: <span>{data.data[0].serviceName}</span></p>
+    <p>Tipo de Servicio: <span>{data.data[0].serviceType}</span></p>
+    
+    </>
+    )}
+   </Container>
+
     </>
   );
 };

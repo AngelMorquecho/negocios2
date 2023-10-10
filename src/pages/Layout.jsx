@@ -20,7 +20,7 @@ import { sweetAlerProductsDelete, sweetAlertLoginOut, sweetAlertLoginS} from "..
 
 const Layout = () => {
   const navigate = useNavigate();
-  const tokenUser=localStorage.getItem('token')
+  const tokenUser=localStorage.getItem('tokenS')
   const [product, setProdcut] = useState([]);
   
   useEffect(() => {
@@ -71,6 +71,7 @@ sweetAlertLoginS()
            
     {!tokenUser ?(''):(<Nav>
       <Link to='/grafica'className='text-decoration-none text-white text-uppercase m-5'>Grafica Satisfaccion</Link>
+      <Link to='/search'className='text-decoration-none text-white text-uppercase m-5'>Busqueda de Ordenes</Link>
     </Nav>)}
     {!tokenUser &&(
               <>

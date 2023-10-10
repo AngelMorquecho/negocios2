@@ -12,9 +12,13 @@ import {
 } from "react-bootstrap";
 import { Link, useNavigate } from "react-router-dom";
 import sportImage from "../img/sportImage.png";
-import c1 from "../img/c1.png";
 import axios from "axios";
 import { sweetAlertProductOrder ,sweetAlertLoginC} from "../sweetAlert/Alert";
+import Badge from '@mui/material/Badge';
+import { styled } from '@mui/material/styles';
+import IconButton from '@mui/material/IconButton';
+import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
+import { sweetAlerProducts,sweetAlertLoginOut } from "../sweetAlert/Alert";
 
 const ShoppingCart = () => {
   const newDate = new Date();
@@ -26,6 +30,15 @@ const ShoppingCart = () => {
   const [productFor, setProductFor] = useState([]);
   const tokenUser = localStorage.getItem("token");
   const navigate = useNavigate();
+  const car=JSON.parse(localStorage.getItem('product'))
+  const StyledBadge = styled(Badge)(({ theme }) => ({
+    '& .MuiBadge-badge': {
+      right: -3,
+      top: 2,
+      border: `2px solid ${theme.palette.background.paper}`,
+      padding: '0 4px',
+    },
+  }));
   useEffect(() => {
     if(!tokenUser){
      sweetAlertLoginC()
@@ -81,15 +94,32 @@ const ShoppingCart = () => {
               SPORT CLUB
             </Link>
           </Navbar.Brand>
-          <Navbar.Toggle aria-controls="responsive-navbar-nav" />
-          <Navbar.Collapse id="responsive-navbar-nav">
-            <Nav className="me-auto"></Nav>
 
-         
-            {!tokenUser ? (
-              ""
-            ) : (
-              <Button
+          <Navbar.Collapse id="responsive-navbar-nav">
+            <Nav className="me-auto">
+              
+             
+            </Nav>
+            {!tokenUser ?(  
+              <>
+            <Link
+              to="/loginC"
+              className="text-decoration-none text-white text-uppercase m-5"
+            >
+              Login
+            </Link>
+            <Nav>
+              {" "}
+              <Link
+                to="/createCountC"
+                className="text-decoration-none text-white text-uppercase"
+              >
+                Create Count
+              </Link>
+              
+            </Nav>
+          
+            </>):(<Button
                 className="text-decoration-none text-white text-uppercase m-5"
                 onClick={() => {
                   localStorage.clear();
@@ -99,8 +129,7 @@ const ShoppingCart = () => {
                 variant="dark"
               >
                 Login Out
-              </Button>
-            )}
+              </Button>)}
           </Navbar.Collapse>
         </Container>
       </Navbar>
@@ -130,14 +159,13 @@ const ShoppingCart = () => {
                 <p className="text-center text-lowercase text-dark fs-4">
                   ${product1.price}
                 </p>
+
                <Button className="text-center text-uppercase mt-2" variant="danger"onClick={()=>{
-                  const productArray=productLs.filter((item) => item.id !==product1.id)
-                  localStorage.removeItem('product')
-       
-                  setProdcutLs(productArray)
-                  localStorage.setItem('productLS',JSON.stringify(productArray))
-
-
+                const productArray=productLs.filter((item) => item.id !==product1.id)
+                localStorage.removeItem('product')
+     
+                setProdcutLs(productArray)
+                localStorage.setItem('productLS',JSON.stringify(productArray))
                 }}>Delete Product</Button>
               </Col>
             ))}

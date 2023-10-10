@@ -75,24 +75,6 @@ const SellerCreate = () => {
           </Col>
         </Row>
         <Row>
-          {name &&
-          <><Form.Label htmlFor='userName' className='text-center text-uppercase blockquote mt-3'>User Name:</Form.Label>
-           <Col md={{ span: 4, offset: 4 }}>
-             <Form.Control
-             type='text'
-             id='userName'
-             name='userName'
-             className='text-center text-uppercase'
-              placeholder='¡Its your User Name!'
-              value={nickName}
-              disabled
-           
-              />
-              
-           </Col></> }
-         
-        </Row>
-        <Row>
           <Form.Label htmlFor='email' className='text-center text-uppercase blockquote mt-3'>Email:</Form.Label>
           <Col md={{ span: 4, offset: 4 }}>
             <Form.Control

@@ -13,7 +13,10 @@ const FormProduct=()=> {
     name:'',
     description:'',
     quantity:'',
-    price:''
+    price:'',
+    high:'',
+    width:'',
+    weight:''
   })
   
   const [image,setImage] = useState(null);
@@ -36,6 +39,9 @@ const FormProduct=()=> {
     formData.append('description',product.description)
     formData.append('quantity',product.quantity)
     formData.append('price',product.price)
+    formData.append('high',product.high)
+    formData.append('width',product.width)
+    formData.append('weight',product.weight)
     formData.append("file",image,image.name)
 
 
@@ -50,7 +56,10 @@ const FormProduct=()=> {
     name:'',
     description:'',
     quantity:'',
-    price:''
+    price:'',
+    high:'',
+    width:'',
+    weight:''
   })
   setImage(null)
 
@@ -131,6 +140,48 @@ const FormProduct=()=> {
                 autoFocus
                 value={product.price}
                 name='price'
+                onChange={handleChange}
+              />
+            </Form.Group>
+            <Form.Group className="mb-3 text-center text-uppercase">
+              <Form.Label htmlFor='high'>High</Form.Label>
+              <Form.Control
+                type="number"
+                id='high'
+                placeholder="write high"
+                className='text-center text-uppercase'
+                min={0}
+                autoFocus
+                value={product.high}
+                name='high'
+                onChange={handleChange}
+              />
+            </Form.Group>
+            <Form.Group className="mb-3 text-center text-uppercase">
+              <Form.Label htmlFor='width'>Width</Form.Label>
+              <Form.Control
+                type="number"
+                id='width'
+                placeholder="write width"
+                className='text-center text-uppercase'
+                min={0}
+                autoFocus
+                value={product.width}
+                name='width'
+                onChange={handleChange}
+              />
+            </Form.Group>
+            <Form.Group className="mb-3 text-center text-uppercase">
+              <Form.Label htmlFor='weight'>Weight</Form.Label>
+              <Form.Control
+                type="number"
+                id='weight'
+                placeholder="write Weight"
+                className='text-center text-uppercase'
+                min={0}
+                autoFocus
+                value={product.weight}
+                name='weight'
                 onChange={handleChange}
               />
             </Form.Group>
